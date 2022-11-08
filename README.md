@@ -6,7 +6,7 @@
 1. [x] View Product
 1. [x] Delete Product
 
-```
+
 1. Create `.env` file & Copy `.env.example` file to `.env` file
 2. Create a database called
 3. Install composer packages - `composer install`.
