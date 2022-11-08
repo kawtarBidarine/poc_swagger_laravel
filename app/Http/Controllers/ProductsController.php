@@ -42,9 +42,9 @@ class ProductsController extends Controller
      *     description="Get Product List as Array",
      *     operationId="index",
      *     security={{"bearerAuth": {}}},
-     *     @OA\Response(response=200,description="Get Product List as Array"),
-     *     @OA\Response(response=400, description="Bad request"),
-     *     @OA\Response(response=404, description="Resource Not Found"),
+     *     @OA\Response(response=200,description="Get Product List as Array", @OA\JsonContent( type = "array" , @OA\Items(ref="#/components/schemas/Product"))),
+     *     @OA\Response(response=400, ref="#/components/responses/BadRequest"),
+		 *     @OA\Response(response=404, ref="#/components/responses/NotFound"),
      * )
      */
     public function index(): JsonResponse
@@ -65,16 +65,16 @@ class ProductsController extends Controller
      *     description="All Products - Publicly Accessible",
      *     operationId="indexAll",
      *     @OA\Parameter(name="perPage", description="perPage, eg; 20", example=20, in="query", @OA\Schema(type="integer")),
-     *     @OA\Response(response=200, description="All Products - Publicly Accessible" ),
-     *     @OA\Response(response=400, description="Bad request"),
-     *     @OA\Response(response=404, description="Resource Not Found"),
+     *     @OA\Response(response=200, description="All Products - Publicly Accessible", @OA\JsonContent( type = "array" , @OA\Items(ref="#/components/schemas/Product")) ),
+     *     @OA\Response(response=400, ref="#/components/responses/BadRequest"),
+		 *     @OA\Response(response=404, ref="#/components/responses/NotFound"),
      * )
      */
     public function indexAll(ProductRequest $request): JsonResponse
     {
         try {
-            $data = $this->productRepository->getPaginatedData($request->perPage);
-            return $this->responseSuccess($data, 'Product List Fetched Successfully !');
+					$data = $this->productRepository->getPaginatedData($request->perPage);
+					return $this->responseSuccess($data, 'Product List Fetched Successfully !');
         } catch (\Exception $e) {
             return $this->responseError(null, $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -89,9 +89,9 @@ class ProductsController extends Controller
      *     operationId="search",
      *     @OA\Parameter(name="perPage", description="perPage, eg; 20", example=20, in="query", @OA\Schema(type="integer")),
      *     @OA\Parameter(name="search", description="search, eg; Test", example="Test", in="query", @OA\Schema(type="string")),
-     *     @OA\Response(response=200, description="All Products - Publicly Accessible" ),
-     *     @OA\Response(response=400, description="Bad request"),
-     *     @OA\Response(response=404, description="Resource Not Found"),
+     *     @OA\Response(response=200, description="All Products - Publicly Accessible", @OA\JsonContent( type = "array" , @OA\Items(ref="#/components/schemas/Product")) ),
+     *     @OA\Response(response=400, ref="#/components/responses/BadRequest"),
+		 *     @OA\Response(response=404, ref="#/components/responses/NotFound"),
      * )
      */
     public function search(ProductRequest $request): JsonResponse
@@ -115,9 +115,9 @@ class ProductsController extends Controller
      *          @OA\JsonContent(ref="#/components/schemas/Product"),
      *      ),
      *      security={{"bearerAuth": {}}},
-     *      @OA\Response(response=200, description="Create New Product" ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+     *     @OA\Response(response=200, description="Create New Product", @OA\JsonContent(ref="#/components/schemas/Product") ),
+     *     @OA\Response(response=400, ref="#/components/responses/BadRequest"),
+		 *     @OA\Response(response=404, ref="#/components/responses/NotFound"),
      * )
      */
     public function store(ProductRequest $request): JsonResponse
@@ -139,12 +139,10 @@ class ProductsController extends Controller
      *     operationId="show",
      *     security={{"bearerAuth": {}}},
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
-     *     @OA\Response(response=200, description="Show Product Details"),
-     *     @OA\Response(response=400, description="Bad request"),
-     *     @OA\Response(response=404, description="Resource Not Found"),
-     *     @OA\PathItem (
-     *     path="/api/products/{id}",
-     *     ),
+     *     @OA\Response(response=200, description="Show Product Details", @OA\JsonContent(ref="#/components/schemas/Product") ),
+     *     @OA\Response(response=400, ref="#/components/responses/BadRequest"),
+		 *     @OA\Response(response=404, ref="#/components/responses/NotFound"),
+     *     @OA\PathItem (path="/api/products/{id}",),
      * )
      */
     public function show($id): JsonResponse
@@ -173,9 +171,9 @@ class ProductsController extends Controller
      *      ),
      *     operationId="update",
      *     security={{"bearerAuth": {}}},
-     *     @OA\Response(response=200, description="Update Product"),
-     *     @OA\Response(response=400, description="Bad request"),
-     *     @OA\Response(response=404, description="Resource Not Found"),
+     *     @OA\Response(response=200, description="Update Product", @OA\JsonContent(ref="#/components/schemas/Product")),
+     *     @OA\Response(response=400, ref="#/components/responses/BadRequest"),
+		 *     @OA\Response(response=404, ref="#/components/responses/NotFound"),
      * )
      */
     public function update(ProductRequest $request, $id): JsonResponse
@@ -200,9 +198,9 @@ class ProductsController extends Controller
      *     operationId="destroy",
      *     security={{"bearerAuth": {}}},
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
-     *     @OA\Response(response=200, description="Delete Product"),
-     *     @OA\Response(response=400, description="Bad request"),
-     *     @OA\Response(response=404, description="Resource Not Found"),
+     *     @OA\Response(response=200, description="Delete Product", @OA\JsonContent(ref="#/components/schemas/Product")),
+     *     @OA\Response(response=400, ref="#/components/responses/BadRequest"),
+		 *     @OA\Response(response=404, ref="#/components/responses/NotFound"),
      * )
      */
     public function destroy($id): JsonResponse

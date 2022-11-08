@@ -29,6 +29,18 @@ use Illuminate\Routing\Controller as BaseController;
  *    bearerFormat="JWT",
  * )
  *
+ * @OA\Response(
+ *    response="BadRequest",
+ *		description="Bad request",
+ *		@OA\JsonContent(@OA\Property(property="message", type="string", example="Bad request")) 
+ * )
+  *
+ * @OA\Response(
+ *    response="NotFound",
+ *		description="Not Found",
+ *		@OA\JsonContent(@OA\Property(property="message", type="string", example="Resource Not Found")) 
+ * )
+ *
  * Tag(
  *     name="Projects",
  *     description="API Endpoints of Projects"

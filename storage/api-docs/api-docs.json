@@ -33,13 +33,20 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Show Product Details"
+                        "description": "Show Product Details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
                     },
                     "400": {
-                        "description": "Bad request"
+                        "$ref": "#/components/responses/BadRequest"
                     },
                     "404": {
-                        "description": "Resource Not Found"
+                        "$ref": "#/components/responses/NotFound"
                     }
                 },
                 "security": [
@@ -77,13 +84,20 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Update Product"
+                        "description": "Update Product",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
                     },
                     "400": {
-                        "description": "Bad request"
+                        "$ref": "#/components/responses/BadRequest"
                     },
                     "404": {
-                        "description": "Resource Not Found"
+                        "$ref": "#/components/responses/NotFound"
                     }
                 },
                 "security": [
@@ -112,13 +126,20 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Delete Product"
+                        "description": "Delete Product",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
                     },
                     "400": {
-                        "description": "Bad request"
+                        "$ref": "#/components/responses/BadRequest"
                     },
                     "404": {
-                        "description": "Resource Not Found"
+                        "$ref": "#/components/responses/NotFound"
                     }
                 },
                 "security": [
@@ -138,13 +159,23 @@
                 "operationId": "index",
                 "responses": {
                     "200": {
-                        "description": "Get Product List as Array"
+                        "description": "Get Product List as Array",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Product"
+                                    }
+                                }
+                            }
+                        }
                     },
                     "400": {
-                        "description": "Bad request"
+                        "$ref": "#/components/responses/BadRequest"
                     },
                     "404": {
-                        "description": "Resource Not Found"
+                        "$ref": "#/components/responses/NotFound"
                     }
                 },
                 "security": [
@@ -171,13 +202,20 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Create New Product"
+                        "description": "Create New Product",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
                     },
                     "400": {
-                        "description": "Bad request"
+                        "$ref": "#/components/responses/BadRequest"
                     },
                     "404": {
-                        "description": "Resource Not Found"
+                        "$ref": "#/components/responses/NotFound"
                     }
                 },
                 "security": [
@@ -208,13 +246,23 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "All Products - Publicly Accessible"
+                        "description": "All Products - Publicly Accessible",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Product"
+                                    }
+                                }
+                            }
+                        }
                     },
                     "400": {
-                        "description": "Bad request"
+                        "$ref": "#/components/responses/BadRequest"
                     },
                     "404": {
-                        "description": "Resource Not Found"
+                        "$ref": "#/components/responses/NotFound"
                     }
                 }
             }
@@ -249,13 +297,23 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "All Products - Publicly Accessible"
+                        "description": "All Products - Publicly Accessible",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Product"
+                                    }
+                                }
+                            }
+                        }
                     },
                     "400": {
-                        "description": "Bad request"
+                        "$ref": "#/components/responses/BadRequest"
                     },
                     "404": {
-                        "description": "Resource Not Found"
+                        "$ref": "#/components/responses/NotFound"
                     }
                 }
             }
@@ -281,9 +339,6 @@
                         "type": "number",
                         "format": "float"
                     },
-                    "image": {
-                        "type": "string"
-                    },
                     "user_id": {
                         "type": "integer"
                     }
@@ -291,6 +346,40 @@
                 "type": "object",
                 "xml": {
                     "name": "Product"
+                }
+            }
+        },
+        "responses": {
+            "BadRequest": {
+                "description": "Bad request",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Bad request"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "Not Found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Resource Not Found"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
                 }
             }
         },

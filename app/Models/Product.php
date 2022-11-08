@@ -34,7 +34,6 @@ class Product extends Model
 		'title',
 		'description',
 		'price',
-		'image',
 		'user_id'
 	];
 
@@ -66,14 +65,6 @@ class Product extends Model
 	 * @var float
 	 */
 	public $price;
-
-
-	/**
-	 * @OA\Property
-	 *
-	 * @var string
-	 */
-	public $image;
 
 	/**
 	 * @var integer

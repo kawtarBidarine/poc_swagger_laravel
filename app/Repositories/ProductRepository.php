@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ProductRepository implements CrudInterface
 {
@@ -80,8 +81,9 @@ class ProductRepository implements CrudInterface
      */
     public function create(array $data): Product
     {
+
         $titleShort      = Str::slug(substr($data['title'], 0, 20));
-        $data['user_id'] = $this->user->id;
+        //$data['user_id'] = $this->user->id;
 
         if (!empty($data['image'])) {
             $data['image'] = UploadHelper::upload('image', $data['image'], $titleShort . '-' . time(), 'images/products');
@@ -116,6 +118,7 @@ class ProductRepository implements CrudInterface
      */
     public function getByID(int $id): Product|null
     {
+				Log::info($id);
         return Product::with('user')->find($id);
     }
 
@@ -144,6 +147,6 @@ class ProductRepository implements CrudInterface
         $product->update($data);
 
         // Finally return the updated product.
-        return $this->getByID($product->id);
+        return $this->getByID($data["id"]);
     }
 }
